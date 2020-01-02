@@ -10,6 +10,7 @@ with open('formats.json', 'r') as fp:
 with open('exclude.txt', 'r') as f:
     EXCLUDE = f.read().strip().splitlines()
 
+
 def get_args():
     try:
         path = sys.argv[1]
