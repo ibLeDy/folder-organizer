@@ -1,23 +1,14 @@
 import shutil
+import json
 import sys
 import os
 
 
-EXCLUDE = ['main.py']
-AUDIO = ['ogg']
-VIDEO = ['mp4']
-IMAGE = ['png']
-DOCUMENT = ['pdf']
-OTHER = ['py', 'rar']
+with open('formats.json', 'r') as fp:
+    EXTENSIONS = json.load(fp)
 
-EXTENSIONS = {
-    'Audio': AUDIO,
-    'Videos': VIDEO,
-    'Images': IMAGE,
-    'Documents': DOCUMENT,
-    'Other': OTHER,
-}
-
+with open('exclude.txt', 'r') as f:
+    EXCLUDE = f.read().strip().splitlines()
 
 def get_args():
     try:
@@ -32,6 +23,7 @@ def move_file(file, new_path):
     try:
         dst = f'{new_path}/{file.name}'
         shutil.move(file.path, dst)
+        print(f"Moved {file.name} to {new_path}")
     except Exception as e:
         print("[ERROR]", e)
 
@@ -63,7 +55,7 @@ if __name__ == "__main__":
 
             # Do not move unknown files
             if not type_:
-                print(f"Unknown format: {file.path !r}")
+                print(f"ERROR Unknown format: {file.path !r}")
             else:
                 # Set destination to specific folder
                 new_path = f'{path}/{type_}'
