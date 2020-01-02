@@ -36,7 +36,7 @@ def check_folder(new_path):
 def check_extension(file):
     file_name, file_ext = os.path.splitext(file.name)
     for type_, ext in EXTENSIONS.items():
-        if file_ext.lower() in ext:
+        if file_ext.lower().strip('.') in ext:
             return type_
 
 
