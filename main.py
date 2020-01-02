@@ -34,7 +34,7 @@ def check_folder(new_path):
 
 
 def check_extension(file):
-    file_name, file_ext = file.name.split('.')
+    file_name, file_ext = os.path.splitext(file.name)
     for type_, ext in EXTENSIONS.items():
         if file_ext.lower() in ext:
             return type_
@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
             # Do not move unknown files
             if not type_:
-                print(f"ERROR Unknown format: {file.path !r}")
+                print(f"ERROR Unknown format from file: {file.path !r}")
             else:
                 # Set destination to specific folder
                 new_path = f'{path}/{type_}'

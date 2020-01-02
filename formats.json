@@ -78,6 +78,7 @@
         "rar",
         "zip",
         "7z",
+        "gz",
         "arj",
         "pkg",
         "deb",
