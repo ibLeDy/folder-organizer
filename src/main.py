@@ -1,8 +1,11 @@
 import shutil
 import json
-import sys
 import os
+from tkinter import filedialog
 
+
+with open('last_path.txt', 'r') as fp:
+    LAST_PATH = fp.read()
 
 with open('formats.json', 'r') as fp:
     EXTENSIONS = json.load(fp)
@@ -11,13 +14,14 @@ with open('exclude.txt', 'r') as f:
     EXCLUDE = f.read().strip().splitlines()
 
 
-def get_args():
-    try:
-        path = sys.argv[1]
-    except IndexError:
-        path = '.'
-        print("Directory not specified, using '.'")
+def get_path(last_path):
+    path = filedialog.askdirectory(initialdir=last_path)
     return path
+
+
+def save_path(path):
+    with open('last_path.txt', 'w') as fp:
+        fp.write(path)
 
 
 def move_file(file, new_path):
@@ -43,26 +47,32 @@ def check_extension(file):
 
 if __name__ == '__main__':
     # Use path arg if present
-    path = get_args()
+    path = get_path(LAST_PATH)
 
-    # List files in directory
-    for file in os.scandir(path):
+    # Continue if user selects a folder
+    if path != tuple():
 
-        # Do not move folders and excluded files
-        if file.is_file() and file.name not in EXCLUDE:
+        # List files in directory
+        for file in os.scandir(path):
 
-            # If it is a file, correlate its extension
-            type_ = check_extension(file)
+            # Do not move folders and excluded files
+            if file.is_file() and file.name not in EXCLUDE:
 
-            # Do not move unknown files
-            if not type_:
-                print(f'ERROR Unknown format from file: {file.path !r}')
-            else:
-                # Set destination to specific folder
-                new_path = f'{path}/{type_}'
+                # If it is a file, correlate its extension
+                type_ = check_extension(file)
 
-                # Create folder if necessary
-                check_folder(new_path)
+                # Do not move unknown files
+                if not type_:
+                    print(f'ERROR Unknown format from file: {file.path !r}')
+                else:
+                    # Set destination to specific folder
+                    new_path = f'{path}/{type_}'
 
-                # Move the file to the new folder
-                move_file(file, new_path)
+                    # Create folder if necessary
+                    check_folder(new_path)
+
+                    # Move the file to the new folder
+                    move_file(file, new_path)
+
+        # Save last selected path
+        save_path(path)
