@@ -1,4 +1,5 @@
-main.py
+folder-organizer.py
+folder-organizer.exe
 README.md
 formats.json
 exclude.txt
