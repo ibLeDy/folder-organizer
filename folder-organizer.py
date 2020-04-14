@@ -4,13 +4,13 @@ import os
 from tkinter import filedialog
 
 
-with open('last_path.txt', 'r') as fp:
+with open('data/last_path.txt', 'r') as fp:
     LAST_PATH = fp.read()
 
-with open('formats.json', 'r') as fp:
+with open('data/formats.json', 'r') as fp:
     EXTENSIONS = json.load(fp)
 
-with open('exclude.txt', 'r') as f:
+with open('data/exclude.txt', 'r') as f:
     EXCLUDE = f.read().strip().splitlines()
 
 
@@ -20,7 +20,7 @@ def get_path(last_path):
 
 
 def save_path(path):
-    with open('last_path.txt', 'w') as fp:
+    with open('data/last_path.txt', 'w') as fp:
         fp.write(path)
 
 
