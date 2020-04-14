@@ -1,16 +1,22 @@
 import shutil
 import json
+import sys
 import os
 from tkinter import filedialog
 
 
-with open('data/last_path.txt', 'r') as fp:
+try:
+    BASE_PATH = sys._MEIPASS
+except AttributeError:
+    BASE_PATH = os.path.abspath('.')
+
+with open(os.path.join(BASE_PATH, 'data/last_path.txt'), 'r') as fp:
     LAST_PATH = fp.read()
 
-with open('data/formats.json', 'r') as fp:
+with open(os.path.join(BASE_PATH, 'data/formats.json'), 'r') as fp:
     EXTENSIONS = json.load(fp)
 
-with open('data/exclude.txt', 'r') as f:
+with open(os.path.join(BASE_PATH, 'data/exclude.txt'), 'r') as f:
     EXCLUDE = f.read().strip().splitlines()
 
 
@@ -20,7 +26,7 @@ def get_path(last_path):
 
 
 def save_path(path):
-    with open('data/last_path.txt', 'w') as fp:
+    with open(os.path.join(BASE_PATH, 'data/last_path.txt'), 'w') as fp:
         fp.write(path)
 
 
