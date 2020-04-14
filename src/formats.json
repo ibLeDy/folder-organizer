@@ -139,7 +139,6 @@
         "ini",
         "ink",
         "msi",
-        "sys",
-        "tmp"
+        "sys"
     ]
 }
