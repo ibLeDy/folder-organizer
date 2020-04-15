@@ -2,6 +2,7 @@ import shutil
 import json
 import sys
 import os
+from tkinter import Tk
 from tkinter import filedialog
 
 
@@ -21,6 +22,7 @@ with open(os.path.join(BASE_PATH, 'data/exclude.txt'), 'r') as f:
 
 
 def get_path(last_path):
+    Tk().withdraw()
     path = filedialog.askdirectory(initialdir=last_path)
     return path
 
