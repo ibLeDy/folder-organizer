@@ -59,7 +59,7 @@ if __name__ == '__main__':
     last_path, extensions, exclude = get_data()
 
     path = get_path(last_path)
-    if path != tuple():
+    if path != tuple() and path != '':
         for file in os.scandir(path):
             if file.is_file() and file.name not in exclude:
                 type_ = check_extension(file)
