@@ -34,7 +34,6 @@ def move_file(file, new_path):
     try:
         dst = f'{new_path}/{file.name}'
         shutil.move(file.path, dst)
-        print(f'Moved {file.name} to {new_path}')
     except Exception as e:
         print('[ERROR]', e)
 
@@ -65,6 +64,12 @@ if __name__ == '__main__':
                 type_ = check_extension(file)
                 if type_:
                     new_path = f'{path}/{type_}'
+                    check_folder(new_path)
+                    move_file(file, new_path)
+            elif file.is_dir() and file.name not in extensions:
+                folder_name = 'Folder'
+                if file.name != folder_name:
+                    new_path = f'{path}/{folder_name}'
                     check_folder(new_path)
                     move_file(file, new_path)
 
