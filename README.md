@@ -11,8 +11,7 @@ These are the default folders:
 - Document
 - Compressed
 - Other
-
-Folders and not known extensions __DO NOT get moved__.
+- Folder (not customizable)
 
 ## Customization
 
