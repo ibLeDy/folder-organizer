@@ -25,9 +25,9 @@ def get_data() -> Tuple[str, Dict[str, str], List[str]]:
     return last_path, extensions, exclude
 
 
-def get_path(last_path: str) -> Union[Tuple, str]:
+def get_path(last_path: str) -> Union[Tuple[()], str]:
     Tk().withdraw()
-    path: Union[Tuple, str] = filedialog.askdirectory(initialdir=last_path)
+    path: Union[Tuple[()], str] = filedialog.askdirectory(initialdir=last_path)
     return path
 
 
@@ -49,11 +49,12 @@ def check_folder(new_path: str) -> None:
         os.mkdir(new_path)
 
 
-def check_extension(file: Any):
+def check_extension(file: Any) -> Optional[str]:
     _, file_ext = os.path.splitext(file.name)
     for type_, ext in extensions.items():
         if file_ext.lower().strip('.') in ext:
             return type_
+    return None
 
 
 if __name__ == '__main__':
