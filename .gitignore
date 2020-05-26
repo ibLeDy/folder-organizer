@@ -1,4 +1,4 @@
 test
 .mypy_cache
-.pytest_cache
 .vscode
+.pytest_cache
