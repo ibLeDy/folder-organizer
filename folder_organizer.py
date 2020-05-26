@@ -72,7 +72,7 @@ if __name__ == '__main__':
         # List files in directory
         for file in os.scandir(path):
 
-            # Do not move folders and excluded files
+            # Only move files that are not in excluded.txt
             if file.is_file() and file.name not in exclude:
 
                 # If it is a file, correlate its extension
@@ -84,6 +84,21 @@ if __name__ == '__main__':
                 else:
                     # Set destination to specific folder
                     new_path: str = f'{path}/{type_}'
+
+                    # Create folder if necessary
+                    check_folder(new_path)
+
+                    # Move the file to the new folder
+                    move_file(file, new_path)
+
+            # Move directories to a new folder
+            elif file.is_dir() and file.name not in extensions:
+                folder_name = 'Folder'
+
+                # Only move previously existing folders
+                if file.name != folder_name:
+                    # Set destination to the newly folder
+                    new_path = f'{path}/{folder_name}'
 
                     # Create folder if necessary
                     check_folder(new_path)
