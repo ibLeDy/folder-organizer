@@ -1,6 +1,9 @@
-folder-organizer.py
-folder-organizer.exe
+folder_organizer.py
+folder-organizer-v05.exe
 README.md
-formats.json
+build.spec
 exclude.txt
+formats.json
+icon.ico
+last_path.txt
 sanitize.py
